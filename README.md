@@ -1,4 +1,4 @@
-# Opinionated Hapi.js (V >= 17) Server Boilerplate
+# Opinionated hapi.js (V >= 17) Server Boilerplate
 
 [Jolly](https://github.com/ravisuhag/jolly) based Hapi server boilerplate. 
 
