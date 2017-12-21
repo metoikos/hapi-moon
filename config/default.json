@@ -1,0 +1,43 @@
+{
+  "appName": "Hapi Boilerplate",
+  "port": 3009,
+  "debug": {
+    "request": [
+      "error",
+      "info"
+    ],
+    "log": [
+      "info",
+      "error",
+      "warning"
+    ]
+  },
+  "cookie": {
+    "name": "COOKIE_NAME",
+    "storeBlank": false,
+    "cache": {
+      "cache": "redisCache",
+      "expiresIn": 604800000
+    },
+    "cookieOptions": {
+      "password": "RANDOM_COOKIE_PASSWORD",
+      "isSecure": false,
+      "ttl": 864000000
+    }
+  },
+  "crumb": {
+    "autoGenerate": true,
+    "restful": true,
+    "cookieOptions": {
+      "isSecure": false,
+      "isHttpOnly": false
+    }
+  },
+  "redisCache": {
+    "name": "redisCache",
+    "host": "127.0.0.1",
+    "port": 6379,
+    "partition": "app_cache"
+  },
+  "mongo": "mongodb://localhost:27017/app"
+}

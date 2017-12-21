@@ -1,0 +1,38 @@
+{
+  "name": "hapi-moon",
+  "version": "0.0.1",
+  "description": "Opinionated Hapi.js (V >= 17) Server Boilerplate",
+  "main": "server.js",
+  "scripts": {
+    "test": ""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:metoikos/hapi-moon.git"
+  },
+  "keywords": [
+    "hapi",
+    "hapijs",
+    "mongoose",
+    "boilerplate"
+  ],
+  "author": "Yılmaz Uğurlu",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/metoikos/hapi-moon/issues"
+  },
+  "homepage": "https://github.com/metoikos/hapi-moon#readme",
+  "dependencies": {
+    "bluebird": "^3.5.1",
+    "boom": "^7.1.1",
+    "catbox-redis": "^4.0.0",
+    "config": "^1.28.1",
+    "crumb": "^7.0.0",
+    "glob": "^7.1.2",
+    "glue": "^5.0.0",
+    "hapi": "^17.2.0",
+    "joi": "^13.0.2",
+    "mongoose": "^4.13.7",
+    "yar": "^9.0.1"
+  }
+}
