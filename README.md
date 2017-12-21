@@ -8,3 +8,9 @@
 * [catbox-redis](https://github.com/hapijs/catbox-redis)
 * [yar](https://github.com/hapijs/yar)
 * [crumb](https://github.com/hapijs/crumb)
+
+## Usage
+```no-highlight
+npm install
+node server.js
+```
