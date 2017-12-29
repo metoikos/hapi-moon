@@ -21,6 +21,11 @@ exports.plugin = {
                 path: '/login',
                 options: Controller.login
             },
+            {
+                method: 'GET',
+                path: '/logout',
+                options: Controller.login
+            },
 
         ]);
     },

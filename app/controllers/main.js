@@ -52,3 +52,17 @@ exports.loginForm = {
         return h.view('auth')
     }
 };
+
+exports.logout = {
+    auth: false,
+    plugins: {
+        'crumb': {
+            restful: false
+        }
+    },
+    description: 'logout the user',
+    handler: async (request, h) => {
+        request.yar.reset();
+        return h.redirect('/login')
+    }
+};
