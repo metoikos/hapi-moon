@@ -9,6 +9,6 @@ exports.view = {
     handler: async (request, h) => {
         const user = await User.findOne({}).exec();
 
-        return "OK";
+        return user;
     }
 };

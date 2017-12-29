@@ -3,15 +3,15 @@
  * Project: hapi-boilerplate
  */
 const Glue = require('glue');
-const manifest = require('./config/manifest').manifest;
+const serverConfig = require('./config/manifest');
 
-const options = {
-    relativeTo: __dirname
-};
+// this is the line we mention in manifest.js
+// relativeTo parameter should be defined here
+const options = {...serverConfig.options, relativeTo: __dirname};
 
 const startServer = async function () {
     try {
-        const server = await Glue.compose(manifest, options);
+        const server = await Glue.compose(serverConfig.manifest, options);
         await server.start();
         console.log('server started');
     }

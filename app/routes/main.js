@@ -4,15 +4,26 @@
  */
 exports.plugin = {
     async register(server, options) {
+        const Controller = require('../controllers/main');
         server.route([
             {
                 method: 'GET',
                 path: '/',
-                options: require('../controllers/main').view
+                options: Controller.view
+            },
+            {
+                method: 'GET',
+                path: '/login',
+                options: Controller.loginForm
+            },
+            {
+                method: 'POST',
+                path: '/login',
+                options: Controller.login
             },
 
         ]);
     },
-    pkg: require('../../package.json'),
-    dependencies: 'mongoose_connector'
+    version: require('../../package.json').version,
+    name: 'main-route'
 };

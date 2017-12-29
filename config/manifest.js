@@ -4,6 +4,7 @@
  */
 const config = require('config');
 const Config = JSON.parse(JSON.stringify(config));
+const Nunjucks = require('nunjucks');
 const plugins = [
     {
         plugin: require('yar'),
@@ -19,8 +20,17 @@ const plugins = [
             uri: Config.mongo
         }
     },
+    // {
+    //     plugin: './lib/auth' // if you need authentication then uncomment this plugin
+    // },
     {
         plugin: './app/routes/main'
+    },
+    {
+        plugin: './app/routes/user',
+        routes: {
+            prefix: '/user'
+        }
     }
 ];
 exports.manifest = {
@@ -50,4 +60,31 @@ exports.manifest = {
     register: {
         plugins
     }
+};
+
+exports.options = {
+    // somehow vision only works if you register your vision plugin at this point
+    // otherwise it gives you an error => Cannot render view without a views manager configured
+    // Not a perfect solution but it works OK
+    preRegister: async (server) => {
+        await server.register(require('vision'));
+        server.views({
+            engines: {
+                html: {
+                    compile: (src, options) => {
+                        const template = Nunjucks.compile(src, options.environment);
+                        return (context) => {
+                            return template.render(context);
+                        };
+                    },
+                    prepare: (options, next) => {
+                        options.compileOptions.environment = Nunjucks.configure(options.path, {watch: false});
+                        return next();
+                    }
+                }
+            },
+            path: './templates' // look at server.js, for more information: [relativeTo: __dirname]
+        });
+    }
+
 };

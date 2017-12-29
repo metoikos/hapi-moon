@@ -1,6 +1,6 @@
 {
   "name": "hapi-moon",
-  "version": "0.0.1",
+  "version": "0.2.0",
   "description": "Opinionated Hapi.js (V >= 17) Server Boilerplate",
   "main": "server.js",
   "scripts": {
@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/metoikos/hapi-moon#readme",
   "dependencies": {
+    "bcrypt": "^1.0.3",
     "bluebird": "^3.5.1",
     "boom": "^7.1.1",
     "catbox-redis": "^4.0.0",
@@ -33,6 +34,8 @@
     "hapi": "^17.2.0",
     "joi": "^13.0.2",
     "mongoose": "^4.13.7",
+    "nunjucks": "^3.0.1",
+    "vision": "^5.3.0",
     "yar": "^9.0.1"
   }
 }

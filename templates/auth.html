@@ -2,9 +2,32 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>$Title$</title>
+    <title>Hapi Moon Auth</title>
 </head>
 <body>
-$END$
+{% if error %}
+<p style="color: #ff0000">
+    {{error}}
+</p>
+{% endif %}
+<form action="/login" method="post">
+    <!--Don't forget to put this information to you for in order to prevent CSRF attacks, crumb variable already in our view variables-->
+    <input type="hidden" name="crumb" value="{{crumb}}">
+    <p>
+        <label>
+            E-mail:
+            <input type="text" name="email">
+        </label>
+    </p>
+    <p>
+        <label>
+            Password:
+            <input type="password" name="password">
+        </label>
+    </p>
+    <p>
+        <input type="submit" value="Sign In">
+    </p>
+</form>
 </body>
 </html>
