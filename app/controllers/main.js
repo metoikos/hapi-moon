@@ -45,6 +45,10 @@ exports.loginForm = {
     description: 'log-in user to system',
     handler: async (request, h) => {
 
+        const user = request.yar.get('auth');
+        // if there is a valid session, send user to home page
+        if (user && user.id) return h.redirect('/');
+
         return h.view('auth')
     }
 };
