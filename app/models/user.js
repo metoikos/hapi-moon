@@ -29,7 +29,7 @@ schema.methods.apiData = function () {
  * @param password
  */
 schema.statics.login = async function (email, password) {
-    const user = await this.findOne({email: email, status: true}).populate('client').exec();
+    const user = await this.findOne({email: email}).exec();
     if (!user) return false;
     const doesMatch = await bcrypt.compare(password, user.password);
     return doesMatch ? user : false;
