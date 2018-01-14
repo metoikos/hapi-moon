@@ -24,7 +24,7 @@ exports.plugin = {
             {
                 method: 'GET',
                 path: '/logout',
-                options: Controller.login
+                options: Controller.logout
             },
 
         ]);
