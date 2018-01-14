@@ -23,7 +23,7 @@
 git clone https://github.com/metoikos/hapi-moon.git
 cd hapi-moon
 npm install
-node server.js
+npm start
 ```
 
 ## Acknowledgements
