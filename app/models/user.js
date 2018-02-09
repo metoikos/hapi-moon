@@ -8,17 +8,19 @@ const SALT_WORK_FACTOR = 10;
 const schema = mongoose.Schema({
     name: String,
     email: String,
-    password: String
+    password: String,
+    active: {type: Boolean, default: false},
 }, {collection: 'user'});
 
 schema.index({"email": 1}, {unique: true}); // schema level
-schema.index({"email": 1, status: 1}, {name: 'login_idx'}); // schema level
+schema.index({"email": 1, active: 1}, {name: 'login_idx'}); // schema level
 
 schema.methods.apiData = function () {
     return {
         id: this._id,
         name: this.name,
-        email: this.email
+        email: this.email,
+        active: this.active,
     }
 };
 
@@ -29,7 +31,7 @@ schema.methods.apiData = function () {
  * @param password
  */
 schema.statics.login = async function (email, password) {
-    const user = await this.findOne({email: email}).exec();
+    const user = await this.findOne({email: email, active: true}).exec();
     if (!user) return false;
     const doesMatch = await bcrypt.compare(password, user.password);
     return doesMatch ? user : false;
