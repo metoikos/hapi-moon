@@ -4,7 +4,7 @@
  */
 exports.plugin = {
     async register(server, options) {
-        const Controller = require('../controllers/main');
+        const Controller = require('../controllers/user');
         server.route([
             {
                 method: 'GET',
