@@ -21,7 +21,7 @@ const plugins = [
         }
     },
     // {
-    //     plugin: './lib/auth' // if you need authentication then uncomment this plugin
+    //     plugin: './lib/auth' // if you need authentication then uncomment this plugin, and remove "auth: false" below
     // },
     {
         plugin: './app/routes/main'
@@ -49,7 +49,7 @@ exports.manifest = {
             },
             cors: true,
             jsonp: 'callback', // <3 Hapi,
-            auth: false
+            auth: false // remove this to enable authentication or set your authentication profile ie. auth: 'jwt'
         },
         debug: Config.debug,
         port: Config.port,
