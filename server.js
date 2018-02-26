@@ -13,7 +13,7 @@ const startServer = async function () {
     try {
         const server = await Glue.compose(serverConfig.manifest, options);
         await server.start();
-        console.log('server started');
+        console.log(`Server listening on ${server.info.uri}`);
     }
     catch (err) {
         console.error(err);
