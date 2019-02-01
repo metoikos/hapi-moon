@@ -5,6 +5,7 @@
 const config = require('config');
 const Config = JSON.parse(JSON.stringify(config));
 const Nunjucks = require('nunjucks');
+
 const plugins = [
     {
         plugin: require('yar'),
@@ -20,9 +21,15 @@ const plugins = [
             uri: Config.mongo
         }
     },
-    // {
-    //     plugin: './lib/auth' // if you need authentication then uncomment this plugin, and remove "auth: false" below
-    // },
+    {
+        plugin: './lib/auth' // remove this plugin if you don't need authentication
+    },
+    {
+        plugin: './app/routes/auth', // remove this plugin too
+        routes: {
+            prefix: '/auth'
+        }
+    },
     {
         plugin: './app/routes/main'
     },
@@ -49,12 +56,15 @@ exports.manifest = {
             },
             cors: true,
             jsonp: 'callback', // <3 Hapi,
-            auth: false // remove this to enable authentication or set your authentication profile ie. auth: 'jwt'
+            auth: 'simple' // remove this to disable authentication
         },
         debug: Config.debug,
         port: Config.port,
         cache: [
-            {...Config.redisCache, engine: require('catbox-redis'),}
+            {
+                name: Config.redisCacheName,
+                provider: {constructor: require('catbox-redis'), options: Config.redisCache}
+            },
         ]
     },
     register: {

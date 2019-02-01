@@ -10,7 +10,7 @@
     {{error}}
 </p>
 {% endif %}
-<form action="/login" method="post">
+<form action="/auth/login" method="post">
     <!--Don't forget to put this information to you for in order to prevent CSRF attacks, crumb variable already in our view variables-->
     <input type="hidden" name="crumb" value="{{crumb}}">
     <p>

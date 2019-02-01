@@ -20,7 +20,7 @@
       "expiresIn": 604800000
     },
     "cookieOptions": {
-      "password": "RANDOM_COOKIE_PASSWORD",
+      "password": "RANDOM_GENERATED_COOKIE_PASSWORD",
       "isSecure": false,
       "ttl": 864000000
     }
@@ -33,11 +33,11 @@
       "isHttpOnly": false
     }
   },
+  "redisCacheName": "redisCache",
   "redisCache": {
-    "name": "redisCache",
     "host": "127.0.0.1",
     "port": 6379,
     "partition": "app_cache"
   },
-  "mongo": "mongodb://localhost:27017/app"
+  "mongo": "mongodb://localhost:27017/hapi-moon-app"
 }

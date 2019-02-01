@@ -1,22 +1,15 @@
-# Opinionated hapi.js (V >= 17) Server Boilerplate
+# Simple yet powerful hassle-free hapi.js Server boilerplate
 
-## Features
-* Mongodb (Mongoose) models
-* Rest api support
-* View render support
+Hapi-Moon provides a ready to go server boilerplate for hapi applications. All you need to do is install dependencies and run `npm start` command. 
+
+With Hapi-Moon you'll have:
+* Multi environment configs (dev/prod/test with [config](https://github.com/lorenwest/node-config))
+* MongoDB (Mongoose) Models 
 * Authentication
-* Cache 
-
-## Packages
-* [glue](https://github.com/hapijs/glue)
-* [config](https://github.com/lorenwest/node-config)
-* [mongoose](https://github.com/Automattic/mongoose)
-* [catbox-redis](https://github.com/hapijs/catbox-redis)
-* [yar](https://github.com/hapijs/yar)
-* [crumb](https://github.com/hapijs/crumb)
-* [vision](https://github.com/hapijs/vision)
-* [nunjucks](https://mozilla.github.io/nunjucks)
-* [bcrypt](https://www.npmjs.com/package/bcrypt)
+* Rest API Support 
+* View Render Support ([nunjucks](https://mozilla.github.io/nunjucks))
+* Cache (Redis with [catbox-redis](https://github.com/hapijs/catbox-redis))
+* Cookie Management with [yar](https://github.com/hapijs/yar) (stores sessions in Redis backend)
 
 ## Usage
 ```no-highlight
@@ -25,6 +18,13 @@ cd hapi-moon
 npm install
 npm start
 ```
+
+## Create User
+
+Run ```npm run add-user``` then follow instructions
+
+[![asciicast](https://asciinema.org/a/afeei7aIEhLKMd6RtbKqUJR8O.svg)](https://asciinema.org/a/afeei7aIEhLKMd6RtbKqUJR8O)
+
 
 ## Acknowledgements
 This module borrows from jolly, thank you to @ravisuhag for his excellent work.

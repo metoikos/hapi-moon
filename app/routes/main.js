@@ -13,20 +13,9 @@ exports.plugin = {
             },
             {
                 method: 'GET',
-                path: '/login',
-                options: Controller.loginForm
+                path: '/secret',
+                options: Controller.secretPage
             },
-            {
-                method: 'POST',
-                path: '/login',
-                options: Controller.login
-            },
-            {
-                method: 'GET',
-                path: '/logout',
-                options: Controller.logout
-            },
-
         ]);
     },
     version: require('../../package.json').version,

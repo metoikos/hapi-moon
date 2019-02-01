@@ -3,7 +3,7 @@
  * Project: hapi-boilerplate
  */
 const mongoose = require('mongoose');
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 const SALT_WORK_FACTOR = 10;
 const schema = mongoose.Schema({
     name: String,
@@ -38,25 +38,22 @@ schema.statics.login = async function (email, password) {
 };
 
 
-schema.pre('save', function (next) {
-    var user = this;
+schema.pre('save', async function (next) {
+    let user = this;
 
     // only hash the password if it has been modified (or is new)
     if (!user.isModified('password')) return next();
 
-    // generate a salt
-    bcrypt.genSalt(SALT_WORK_FACTOR, function (err, salt) {
-        if (err) return next(err);
-
+    try {
+        // generate a salt
+        const salt = await bcrypt.genSalt(SALT_WORK_FACTOR);
         // hash the password along with our new salt
-        bcrypt.hash(user.password, salt, function (err, hash) {
-            if (err) return next(err);
-
-            // override the cleartext password with the hashed one
-            user.password = hash;
-            next();
-        });
-    });
+        // override the cleartext password with the hashed one
+        user.password = await bcrypt.hash(user.password, salt);
+        next();
+    } catch (e) {
+        return next(e);
+    }
 });
 
 

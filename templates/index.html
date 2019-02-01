@@ -6,5 +6,19 @@
 </head>
 <body>
 <h1>{{title}}</h1>
+
+<p>
+    {% if secretLink %}
+    <a href="/secret">Go to secret page</a>
+    {% else %}
+    <a href="/">Go to homepage</a>
+    {% endif %}
+</p>
+
+{% if showLogout %}
+<p>
+    <a href="/auth/logout">Logout</a>
+</p>
+{% endif %}
 </body>
 </html>
