@@ -21,6 +21,16 @@ exports.plugin = {
                 path: '/logout',
                 options: Controller.logout
             },
+            {
+                method: 'GET',
+                path: '/register',
+                options: Controller.registerForm
+            },
+            {
+                method: 'POST',
+                path: '/register',
+                options: Controller.register
+            },
 
         ]);
     },

@@ -35,14 +35,54 @@ exports.loginForm = {
             restful: false
         }
     },
-    description: 'show sigh in form',
+    description: 'show sign in form',
     handler: async (request, h) => {
 
         const user = request.yar.get('auth');
         // if there is a valid session, send user to home page
         if (user && user.id) return h.redirect('/');
 
-        return h.view('auth')
+        return h.view('auth', {success: request.yar.flash('success')})
+    }
+};
+
+exports.registerForm = {
+    auth: false,
+    plugins: {
+        'crumb': {
+            restful: false
+        }
+    },
+    description: 'show register form',
+    handler: async (request, h) => {
+
+        const user = request.yar.get('auth');
+        // if there is a valid session, send user to home page
+        if (user && user.id) return h.redirect('/');
+
+        return h.view('register')
+    }
+};
+
+exports.register = {
+    auth: false,
+    plugins: {
+        'crumb': {
+            restful: false
+        }
+    },
+    validate: {
+        payload: validators.register
+    },
+    description: 'register user',
+    handler: async (request, h) => {
+
+        const {name, email, password} = request.payload;
+        const user = new User({name, email, password, active: true});
+        await user.save();
+        request.yar.flash('success', 'User registration successful!');
+
+        return h.redirect('/')
     }
 };
 
@@ -53,7 +93,7 @@ exports.logout = {
             restful: false
         }
     },
-    description: 'sigh out the user',
+    description: 'sign out the user',
     handler: async (request, h) => {
         request.yar.reset();
         return h.redirect('/')

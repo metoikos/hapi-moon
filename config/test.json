@@ -1,6 +1,6 @@
 {
   "appName": "Hapi-moon Boilerplate",
-  "port": 3009,
+  "port": 3999,
   "debug": {
     "request": [
       "error",
@@ -39,5 +39,5 @@
     "port": 6379,
     "partition": "app_cache"
   },
-  "mongo": "mongodb://localhost:27017/hapi-moon-app"
+  "mongo": "mongodb://localhost:27017/hapi-moon-app-test"
 }

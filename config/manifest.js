@@ -8,11 +8,11 @@ const Nunjucks = require('nunjucks');
 
 const plugins = [
     {
-        plugin: require('yar'),
+        plugin: require('@hapi/yar'),
         options: Config.cookie
     },
     {
-        plugin: require('crumb'),
+        plugin: require('@hapi/crumb'),
         options: Config.crumb
     },
     {
@@ -63,7 +63,7 @@ exports.manifest = {
         cache: [
             {
                 name: Config.redisCacheName,
-                provider: {constructor: require('catbox-redis'), options: Config.redisCache}
+                provider: {constructor: require('@hapi/catbox-redis'), options: Config.redisCache}
             },
         ]
     },
@@ -77,7 +77,7 @@ exports.options = {
     // otherwise it gives you an error => Cannot render view without a views manager configured
     // Not a perfect solution but it works OK
     preRegister: async (server) => {
-        await server.register(require('vision'));
+        await server.register(require('@hapi/vision'));
         server.views({
             engines: {
                 html: {

@@ -10,14 +10,15 @@
     {{error}}
 </p>
 {% endif %}
-{% if success %}
-<p style="color: #96FF83">
-    {{success}}
-</p>
-{% endif %}
-<form action="/auth/login" method="post">
+<form action="/auth/register" method="post">
     <!--Don't forget to put this information to you for in order to prevent CSRF attacks, crumb variable already in our view variables-->
     <input type="hidden" name="crumb" value="{{crumb}}">
+    <p>
+        <label>
+            Name:
+            <input type="text" name="name">
+        </label>
+    </p>
     <p>
         <label>
             E-mail:
@@ -31,7 +32,13 @@
         </label>
     </p>
     <p>
-        <input type="submit" value="Sign In">
+        <label>
+            Password Again:
+            <input type="password" name="passwordMatch">
+        </label>
+    </p>
+    <p>
+        <input type="submit" value="Sign Up">
     </p>
 </form>
 </body>
