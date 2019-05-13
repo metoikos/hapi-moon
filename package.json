@@ -4,7 +4,7 @@
   "description": "Simple yet powerful hassle-free hapi.js Server boilerplate",
   "main": "server.js",
   "scripts": {
-    "test": "lab -m 5000 -c -t 70 -a @hapi/code --coverage-exclude app/models --coverage-exclude config",
+    "test": "lab -m 5000 -c -t 70 -a @hapi/code --coverage-exclude app/models --coverage-exclude lib/utils.js --coverage-exclude lib/validators --coverage-exclude lib/mongoose.js --coverage-exclude config",
     "add-user": "node commands/create-user.js"
   },
   "repository": {

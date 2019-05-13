@@ -13,7 +13,7 @@
     ]
   },
   "cookie": {
-    "name": "COOKIE_NAME",
+    "name": "hapi-moon-auth",
     "storeBlank": false,
     "cache": {
       "cache": "redisCache",
@@ -37,7 +37,7 @@
   "redisCache": {
     "host": "127.0.0.1",
     "port": 6379,
-    "partition": "app_cache"
+    "partition": "hapi_moon_cache"
   },
   "mongo": "mongodb://localhost:27017/hapi-moon-app"
 }

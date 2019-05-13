@@ -31,6 +31,11 @@ exports.plugin = {
                 path: '/register',
                 options: Controller.register
             },
+            {
+                method: 'POST',
+                path: '/register_api',
+                options: Controller.registerApi
+            },
 
         ]);
     },

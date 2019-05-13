@@ -4,6 +4,7 @@
  */
 const config = require('config');
 const Config = JSON.parse(JSON.stringify(config));
+const Boom = require('@hapi/boom');
 const Nunjucks = require('nunjucks');
 
 const plugins = [
@@ -56,7 +57,36 @@ exports.manifest = {
             },
             cors: true,
             jsonp: 'callback', // <3 Hapi,
-            auth: 'simple' // remove this to disable authentication
+            auth: 'simple', // remove this to disable authentication
+            validate: {
+                options: {abortEarly: false},
+                failAction: async (request, h, err) => {
+                    // TODO: handle fail action and error messages better
+                    // err.details
+                    // you can set these messages to flash, request.yar is accessible here
+                    // WARNING
+                    // This piece of code is untested to malicious payloads.
+                    if (err.isBoom && err.isJoi) {
+                        const {details} = err;
+                        const output = {};
+                        for (let e of details) {
+                            const {message, path} = e;
+                            if (Array.isArray(path) && path.length > 0) {
+                                output[path[0]] = message;
+                            } else {
+                                output["generic-error"] = message;
+                            }
+                        }
+
+                        const newErr = Boom.badRequest("Invalid Request");
+                        newErr.output.payload['details'] = output;
+
+                        return newErr
+                    }
+
+                    return err
+                }
+            }
         },
         debug: Config.debug,
         port: Config.port,
