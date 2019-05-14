@@ -1,5 +1,7 @@
 # Simple yet powerful hassle-free hapi.js Server boilerplate
 
+[![Build Status](https://travis-ci.org/metoikos/hapi-moon.svg?branch=master)](https://travis-ci.org/metoikos/hapi-moon)
+
 Hapi-Moon provides a ready to go server boilerplate for hapi applications. All you need to do is install dependencies and run `npm start` command. 
 
 With Hapi-Moon you'll have:
