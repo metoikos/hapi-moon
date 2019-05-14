@@ -2,7 +2,7 @@
  * Created by metoikos on 21.12.2017.
  * Project: hapi-boilerplate
  */
-const Glue = require('glue');
+const Glue = require('@hapi/glue');
 const serverConfig = require('./config/manifest');
 
 // this is the line we mention in manifest.js

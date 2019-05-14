@@ -1,0 +1,29 @@
+{
+  "appName": "Hapi-moon Boilerplate",
+  "port": 3999,
+  "serverCache": {
+    "cache": "redisCacheTest",
+    "expiresIn": 604800000
+  },
+  "debug": false,
+  "cookie": {
+    "name": "hapi-moon-auth",
+    "storeBlank": false,
+    "cache": {
+      "cache": "redisCacheTest",
+      "expiresIn": 604800000
+    },
+    "cookieOptions": {
+      "password": ";rwElUU]mApl^hG+rCB~Wn.Imp7M*5*:#\\'#)=Dx^crg}$u5&n",
+      "isSecure": false,
+      "ttl": 864000000
+    }
+  },
+  "redisCacheName": "redisCacheTest",
+  "redisCache": {
+    "host": "127.0.0.1",
+    "port": 6379,
+    "partition": "hapi_moon_cache_test"
+  },
+  "mongo": "mongodb://localhost:27017/hapi-moon-app-test"
+}
