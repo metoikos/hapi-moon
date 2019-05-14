@@ -227,7 +227,6 @@ describe('Validate auth routes', () => {
             method: 'get',
             headers: {
                 cookie: `crumb=${cookie[1]};hapi-moon-auth=${yarCookie[1]}`,
-                'hapi-moon-auth': yarCookie[1]
             }
         });
 
@@ -247,7 +246,6 @@ describe('Validate auth routes', () => {
             },
             headers: {
                 cookie: 'crumb=' + cookie[1],
-                // 'x-csrf-token': cookie[1]
             }
         });
 
@@ -263,7 +261,6 @@ describe('Validate auth routes', () => {
             method: 'get',
             headers: {
                 cookie: `crumb=${cookie[1]};hapi-moon-auth=${yarCookie[1]}`,
-                'hapi-moon-auth': yarCookie[1]
             }
         });
 
@@ -275,7 +272,6 @@ describe('Validate auth routes', () => {
             method: 'get',
             headers: {
                 cookie: `crumb=${cookie[1]};hapi-moon-auth=${yarCookie[1]}`,
-                'hapi-moon-auth': yarCookie[1]
             }
         });
 
@@ -295,7 +291,6 @@ describe('Validate auth routes', () => {
             },
             headers: {
                 cookie: 'crumb=' + cookie[1],
-                // 'x-csrf-token': cookie[1]
             }
         });
 
@@ -311,7 +306,6 @@ describe('Validate auth routes', () => {
             method: 'get',
             headers: {
                 cookie: `crumb=${cookie[1]};hapi-moon-auth=${yarCookie[1]}`,
-                'hapi-moon-auth': yarCookie[1]
             }
         });
 
@@ -324,7 +318,6 @@ describe('Validate auth routes', () => {
             method: 'get',
             headers: {
                 cookie: `crumb=${cookie[1]};hapi-moon-auth=${yarCookie[1]}`,
-                'hapi-moon-auth': yarCookie[1],
             }
         });
 
@@ -359,7 +352,6 @@ describe('Validate auth routes', () => {
             method: 'get',
             headers: {
                 cookie: `crumb=${cookie[1]};hapi-moon-auth=${yarCookie[1]}`,
-                'hapi-moon-auth': yarCookie[1],
                 'x-csrf-token': cookie[1]
             }
         });
