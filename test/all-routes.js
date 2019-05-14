@@ -1,6 +1,6 @@
 /**
- * Created by metoikos on 27.02.2018.
- * Project: Smart Platform Server
+ * Created by metoikos on 12.05.2019.
+ * Project: hapi-moon
  */
 const Lab = require('@hapi/lab');
 const lab = exports.lab = Lab.script();
