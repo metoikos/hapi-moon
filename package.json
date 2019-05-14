@@ -1,6 +1,6 @@
 {
   "name": "hapi-moon",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Simple yet powerful hassle-free hapi.js Server boilerplate",
   "main": "server.js",
   "scripts": {
