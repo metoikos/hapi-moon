@@ -36,8 +36,8 @@ Also you need to remove `plugins.crumb` block from your handler.
     }
 ```
 
-Let's say you want to implement authentication to your SPA then auth/login handler
-should be like this.
+Let's say you want to implement authentication to your SPA 
+then your auth/login handler should be like this.
 
 ```js
 exports.login = {
@@ -59,7 +59,7 @@ exports.login = {
 ```
 
 
-To read more about this please refer to ([crumb](https://github.com/hapijs/crumb)) documentation.
+To read more about this please refer to [crumb](https://github.com/hapijs/crumb) documentation.
 
 
 ## Create User

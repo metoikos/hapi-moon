@@ -6,6 +6,6 @@
 exports.view = {
     description: 'main request handler',
     handler: async (request, h) => {
-        return request.routes.credentials;
+        return request.auth.credentials;
     }
 };

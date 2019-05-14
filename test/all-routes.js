@@ -76,6 +76,7 @@ describe('Validate auth routes', () => {
     });
 
     it('should reject duplicate user', async () => {
+        // Rest Api endpoint
         const res = await server.inject({
             url: '/auth/register_api',
             method: 'post',
@@ -92,6 +93,24 @@ describe('Validate auth routes', () => {
         });
         expect(res.statusCode).to.equal(400);
         expect(res.result.message).to.equal('The email address you used already registered. Please check your details!');
+
+        // html form endpoint
+        const res2 = await server.inject({
+            url: '/auth/register',
+            method: 'post',
+            payload: {
+                name: 'John Doe',
+                email: 'sample2@test.com',
+                password: 'asdasd',
+                passwordMatch: 'asdasd',
+                crumb: cookie[1],
+            },
+            headers: {
+                cookie: 'crumb=' + cookie[1],
+            }
+        });
+        expect(res2.statusCode).to.equal(400);
+        expect(res2.result.message).to.equal('The email address you used already registered. Please check your details!');
     });
 
     it('should reject invalid payload', async () => {
@@ -133,10 +152,91 @@ describe('Validate auth routes', () => {
         expect(res.statusCode).to.equal(200);
         expect(res.result.indexOf('Hapi Moon Auth')).to.above(-1);
         expect(res.result.indexOf('<input type="text" name="email">')).to.above(-1);
-        // expect(res.headers['location']).to.equal('/auth/login');
+    });
+
+    it('should render register page', async () => {
+        const res = await server.inject({
+            url: '/auth/register',
+            method: 'get',
+        });
+
+        expect(res.statusCode).to.equal(200);
+        expect(res.result.indexOf('Hapi Moon Register')).to.above(-1);
+        expect(res.result.indexOf('<input type="text" name="email">')).to.above(-1);
     });
 
     it('should login to system', async () => {
+        const res = await server.inject({
+            url: '/auth/login',
+            method: 'post',
+            payload: {
+                email: 'sample2@test.com',
+                password: 'asdasd',
+                'crumb': cookie[1]
+            },
+            headers: {
+                cookie: 'crumb=' + cookie[1],
+            }
+        });
+
+        expect(res.statusCode).to.equal(200);
+        expect(res.result.status).to.equal(true);
+        expect(res.result.result.email).to.equal('sample2@test.com');
+    });
+
+    it('should reject invalid login', async () => {
+        const res = await server.inject({
+            url: '/auth/login',
+            method: 'post',
+            payload: {
+                email: 'sample2@test.com',
+                password: 'asdasda',
+                'crumb': cookie[1]
+            },
+            headers: {
+                cookie: 'crumb=' + cookie[1],
+            }
+        });
+
+        expect(res.statusCode).to.equal(403);
+    });
+
+    it('should allow authenticated user to see secret page', async () => {
+        const res = await server.inject({
+            url: '/auth/login',
+            method: 'post',
+            payload: {
+                email: 'sample2@test.com',
+                password: 'asdasd',
+                'crumb': cookie[1]
+            },
+            headers: {
+                cookie: 'crumb=' + cookie[1],
+            }
+        });
+
+        expect(res.statusCode).to.equal(200);
+        expect(res.result.status).to.equal(true);
+        expect(res.result.result.email).to.equal('sample2@test.com');
+        const header = res.headers['set-cookie'];
+
+        const yarCookie = header[0].match(/hapi-moon-auth=([^\x00-\x20\"\,\;\\\x7F]*)/);
+
+        const res2 = await server.inject({
+            url: '/secret',
+            method: 'get',
+            headers: {
+                cookie: `crumb=${cookie[1]};hapi-moon-auth=${yarCookie[1]}`,
+                'hapi-moon-auth': yarCookie[1]
+            }
+        });
+
+        expect(res2.statusCode).to.equal(200);
+        expect(res2.result.indexOf('This page is secret')).to.above(-1);
+        expect(res2.result.indexOf('Go to homepage')).to.above(-1);
+    });
+
+    it('should prevent to access login or register form if user already signed-in', async () => {
         const res = await server.inject({
             url: '/auth/login',
             method: 'post',
@@ -154,29 +254,37 @@ describe('Validate auth routes', () => {
         expect(res.statusCode).to.equal(200);
         expect(res.result.status).to.equal(true);
         expect(res.result.result.email).to.equal('sample2@test.com');
-        // expect(res.headers['location']).to.equal('/auth/login');
-    });
+        const header = res.headers['set-cookie'];
 
-    it('should reject invalid login', async () => {
-        const res = await server.inject({
+        const yarCookie = header[0].match(/hapi-moon-auth=([^\x00-\x20\"\,\;\\\x7F]*)/);
+
+        const res2 = await server.inject({
             url: '/auth/login',
-            method: 'post',
-            payload: {
-                email: 'sample2@test.com',
-                password: 'asdasda',
-                'crumb': cookie[1]
-            },
+            method: 'get',
             headers: {
-                cookie: 'crumb=' + cookie[1],
-                // 'x-csrf-token': cookie[1]
+                cookie: `crumb=${cookie[1]};hapi-moon-auth=${yarCookie[1]}`,
+                'hapi-moon-auth': yarCookie[1]
             }
         });
 
-        expect(res.statusCode).to.equal(403);
+        expect(res2.statusCode).to.equal(302);
+        expect(res2.headers['location']).to.equal('/');
+
+        const res3 = await server.inject({
+            url: '/auth/register',
+            method: 'get',
+            headers: {
+                cookie: `crumb=${cookie[1]};hapi-moon-auth=${yarCookie[1]}`,
+                'hapi-moon-auth': yarCookie[1]
+            }
+        });
+
+        expect(res3.statusCode).to.equal(302);
+        expect(res3.headers['location']).to.equal('/');
     });
 
 
-    it('should allow authenticated user to see secret page', async () => {
+    it('should logout and block access to secret page', async () => {
         const res = await server.inject({
             url: '/auth/login',
             method: 'post',
@@ -210,6 +318,70 @@ describe('Validate auth routes', () => {
         expect(res2.statusCode).to.equal(200);
         expect(res2.result.indexOf('This page is secret')).to.above(-1);
         expect(res2.result.indexOf('Go to homepage')).to.above(-1);
+
+        const res3 = await server.inject({
+            url: '/auth/logout',
+            method: 'get',
+            headers: {
+                cookie: `crumb=${cookie[1]};hapi-moon-auth=${yarCookie[1]}`,
+                'hapi-moon-auth': yarCookie[1],
+            }
+        });
+
+        expect(res3.statusCode).to.equal(302);
+        expect(res3.headers['location']).to.equal('/');
+    });
+
+
+    it('should return user information from user endpoint', async () => {
+        const res = await server.inject({
+            url: '/auth/login',
+            method: 'post',
+            payload: {
+                email: 'sample2@test.com',
+                password: 'asdasd',
+                'crumb': cookie[1]
+            },
+            headers: {
+                cookie: 'crumb=' + cookie[1],
+            }
+        });
+
+        expect(res.statusCode).to.equal(200);
+        expect(res.result.status).to.equal(true);
+        expect(res.result.result.email).to.equal('sample2@test.com');
+        const header = res.headers['set-cookie'];
+
+        const yarCookie = header[0].match(/hapi-moon-auth=([^\x00-\x20\"\,\;\\\x7F]*)/);
+
+        const res2 = await server.inject({
+            url: '/user',
+            method: 'get',
+            headers: {
+                cookie: `crumb=${cookie[1]};hapi-moon-auth=${yarCookie[1]}`,
+                'hapi-moon-auth': yarCookie[1],
+                'x-csrf-token': cookie[1]
+            }
+        });
+
+        expect(res2.statusCode).to.equal(200);
+        expect(res2.result.email).to.equal('sample2@test.com');
+    });
+
+
+    it('should return as JSON to ajax requests', async () => {
+        const res = await server.inject({
+            url: '/user',
+            method: 'get',
+            headers: {
+                cookie: `crumb=${cookie[1]}`,
+                'x-csrf-token': cookie[1],
+                'x-requested-with': 'XMLHttpRequest',
+            }
+        });
+
+        expect(res.statusCode).to.equal(401);
+        expect(res.result.message).to.equal('Please login to system');
     });
 
 });

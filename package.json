@@ -35,13 +35,13 @@
     "@hapi/glue": "^6.1.0",
     "@hapi/hapi": "^18.3.1",
     "@hapi/hoek": "^6.2.1",
-    "@hapi/joi": "^15.0.2",
+    "@hapi/joi": "^15.0.3",
     "@hapi/vision": "^5.5.2",
     "@hapi/yar": "^9.2.0",
     "bcryptjs": "^2.4.3",
     "config": "^3.1.0",
     "glob": "^7.1.4",
-    "mongoose": "^5.5.7",
+    "mongoose": "^5.5.8",
     "nunjucks": "^3.2.0"
   },
   "devDependencies": {

@@ -21,7 +21,7 @@ exports.login = {
     handler: async (request, h) => {
         const result = await User.login(request.payload.email, request.payload.password);
         if (result) {
-            request.yar.set('routes.js', result.apiData());
+            request.yar.set('auth', result.apiData());
             return {status: true, result: result.apiData()};
         }
 
@@ -39,9 +39,11 @@ exports.loginForm = {
     description: 'show sign in form',
     handler: async (request, h) => {
 
-        const user = request.yar.get('routes.js');
+        const user = request.yar.get('auth');
         // if there is a valid session, send user to home page
-        if (user && user.id) return h.redirect('/');
+        if (user) {
+            return h.redirect('/')
+        }
 
         return h.view('auth', {success: request.yar.flash('success')})
     }
@@ -57,9 +59,9 @@ exports.registerForm = {
     description: 'show register form',
     handler: async (request, h) => {
 
-        const user = request.yar.get('routes.js');
+        const user = request.yar.get('auth');
         // if there is a valid session, send user to home page
-        if (user && user.id) return h.redirect('/');
+        if (user) return h.redirect('/');
 
         return h.view('register')
     }
@@ -135,7 +137,7 @@ exports.logout = {
     },
     description: 'sign out the user',
     handler: async (request, h) => {
-        request.yar.reset();
+        request.yar.clear('auth');
         return h.redirect('/')
     }
 };
