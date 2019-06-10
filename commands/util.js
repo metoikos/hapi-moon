@@ -32,7 +32,7 @@ const Colors = {
 
 const ColorOutput = (color, text) => {
     if (!Colors[color]) {
-        throw new Error("Invalid color schema");
+        throw new Error('Invalid color schema');
     }
     return `${Colors[color]}${text}${Colors.Reset}`
 };

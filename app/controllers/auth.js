@@ -88,7 +88,7 @@ exports.register = {
             return h.redirect('/auth/login')
         } catch (e) {
             if (e.code && e.code === 11000) {
-                return Boom.badRequest("The email address you used already registered. Please check your details!");
+                return Boom.badRequest('The email address you used is already registered. Please check your details!');
             }
 
             /* $lab:coverage:off$ */
@@ -111,12 +111,11 @@ exports.registerApi = {
             const {name, email, password} = request.payload;
             const user = new User({name, email, password, active: true});
             await user.save();
-            request.yar.flash('success', 'User registration successful!');
 
-            return {status: true, message: "User created successfully"}
+            return {status: true, message: 'User created successfully'}
         } catch (e) {
             if (e.code && e.code === 11000) {
-                return Boom.badRequest("The email address you used already registered. Please check your details!");
+                return Boom.badRequest('The email address you used is already registered. Please check your details!');
             }
 
             /* $lab:coverage:off$ */

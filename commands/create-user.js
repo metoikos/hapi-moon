@@ -4,16 +4,16 @@
  */
 
 
-const Hoek = require('hoek');
-const Joi = require('joi');
+const Hoek = require('@hapi/hoek');
+const Joi = require('@hapi/joi');
 const util = require('./util');
 const config = require('config');
 const Mongoose = require('mongoose');
 const readline = require('readline');
 
 const register = Joi.object().keys({
-    name: Joi.string().max(100).min(2).required().trim().label('Name').error(err => ({message: "Please enter your name!"})),
-    email: Joi.string().email().max(100).required().trim().label('E-mail').error(err => ({message: "Please enter your e-mail address!"})),
+    name: Joi.string().max(100).min(2).required().trim().label('Name').error(err => ({message: 'Please enter your name!'})),
+    email: Joi.string().email().max(100).required().trim().label('E-mail').error(err => ({message: 'Please enter your e-mail address!'})),
     password: Joi.string().min(2).required().trim().label('Password').error(new Error('Please enter your password!'))
 });
 
@@ -37,8 +37,8 @@ let rl = readline.createInterface({
 });
 
 rl.on('SIGINT', () => {
-    rl.question(util.ColorOutput('FgCyan', "Are you sure you want to exit? [y, yes]\n"), (answer) => {
-        console.log("rl");
+    rl.question(util.ColorOutput('FgCyan', 'Are you sure you want to exit? [y, yes]\n'), (answer) => {
+        console.log('rl');
         if (answer.match(/^y(es)?$/i)) {
             rl.close();
         }
@@ -48,7 +48,7 @@ rl.on('SIGINT', () => {
 
 const question = (q) => {
     return new Promise(resolve => {
-        rl.question(util.ColorOutput('FgMagenta', q + ": "), (answer) => {
+        rl.question(util.ColorOutput('FgMagenta', q + ': '), (answer) => {
             resolve(answer);
         });
     })
@@ -57,9 +57,9 @@ const question = (q) => {
 
 const handleJobs = async () => {
     console.log(util.ColorOutput('FgYellow', 'Welcome to hapi-moon dump commandline utility'));
-    let name = await question("Please enter user's full name (min 2 char)");
-    let email = await question("Please enter user e-mail");
-    let password = await question("Password (min 2 char)");
+    let name = await question(`Please enter user's full name (min 2 char)`);
+    let email = await question('Please enter user e-mail');
+    let password = await question('Password (min 2 char)');
 
     const result = Joi.validate({
         name, email, password
