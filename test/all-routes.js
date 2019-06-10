@@ -92,7 +92,7 @@ describe('Validate auth routes', () => {
             }
         });
         expect(res.statusCode).to.equal(400);
-        expect(res.result.message).to.equal('The email address you used already registered. Please check your details!');
+        expect(res.result.message).to.equal('The email address you used is already registered. Please check your details!');
 
         // html form endpoint
         const res2 = await server.inject({
@@ -110,7 +110,7 @@ describe('Validate auth routes', () => {
             }
         });
         expect(res2.statusCode).to.equal(400);
-        expect(res2.result.message).to.equal('The email address you used already registered. Please check your details!');
+        expect(res2.result.message).to.equal('The email address you used is already registered. Please check your details!');
     });
 
     it('should reject invalid payload', async () => {
