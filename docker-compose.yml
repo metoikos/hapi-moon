@@ -1,0 +1,35 @@
+version: '3.1'
+
+services:
+  mongo:
+    image: mongo:4.0-xenial
+    volumes:
+      - mongodb-data:/var/lib/mongodb
+    ports:
+      - 27017:27017
+
+  redis:
+    image: redis:5.0.7-alpine
+    volumes:
+      - redis-data:/data
+    ports:
+      - 6379:6379
+
+  hapi_app:
+    build:
+      context: .
+    # uncomment for production
+#    environment:
+#      NODE_ENV: production
+
+    # in production make sure you are exporting the right ports
+    ports:
+      - 3009:3009
+    depends_on:
+      - mongo
+      - redis
+
+volumes:
+  mongodb-data:
+  redis-data:
+

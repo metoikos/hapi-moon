@@ -76,4 +76,6 @@ cmake-build-debug/
 ## File-based project format:
 *.iws
 
+config/production.json
+
 # End of https://www.gitignore.io/api/node,webstorm

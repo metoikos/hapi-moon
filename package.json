@@ -1,7 +1,7 @@
 {
   "name": "hapi-moon",
-  "version": "2.0.0",
-  "description": "Simple yet powerful hassle-free hapi.js Server boilerplate",
+  "version": "3.0.0",
+  "description": "Simple yet powerful hassle-free and production ready hapi.js Server boilerplate",
   "main": "server.js",
   "scripts": {
     "test": "lab -m 5000 -c -t 70 -a @hapi/code --coverage-exclude app/models --coverage-exclude lib/utils.js --coverage-exclude lib/validators --coverage-exclude lib/mongoose.js --coverage-exclude config",
@@ -33,15 +33,15 @@
     "@hapi/catbox-redis": "^5.0.5",
     "@hapi/crumb": "^7.3.2",
     "@hapi/glue": "^6.2.0",
-    "@hapi/hapi": "^18.4.0",
+    "@hapi/hapi": "^18.4.1",
     "@hapi/hoek": "^6.2.4",
     "@hapi/joi": "^15.1.1",
     "@hapi/vision": "^5.5.4",
     "@hapi/yar": "^9.2.1",
     "bcryptjs": "^2.4.3",
-    "config": "^3.2.4",
-    "glob": "^7.1.5",
-    "mongoose": "^5.7.8",
+    "config": "^3.2.6",
+    "glob": "^7.1.6",
+    "mongoose": "^5.9.2",
     "nunjucks": "^3.2.0"
   },
   "devDependencies": {
