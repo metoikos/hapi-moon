@@ -5,7 +5,7 @@
 const Glue = require('@hapi/glue');
 const serverConfig = require('./config/manifest');
 
-// this is the line we mention in manifest.js
+// This is the line we mentioned in manifest.js
 // relativeTo parameter should be defined here
 const options = {...serverConfig.options, relativeTo: __dirname};
 

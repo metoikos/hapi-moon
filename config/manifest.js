@@ -103,8 +103,8 @@ exports.manifest = {
 };
 
 exports.options = {
-    // somehow vision only works if you register your vision plugin at this point
-    // otherwise it gives you an error => Cannot render view without a views manager configured
+    // Somehow vision only works if you register your vision plugin at this point.
+    // Otherwise, it gives you an error => "Cannot render view without a views manager configured".
     // Not a perfect solution but it works OK
     preRegister: async (server) => {
         await server.register(require('@hapi/vision'));
