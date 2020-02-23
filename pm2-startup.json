@@ -1,0 +1,25 @@
+{
+  "apps": [
+    {
+      "name": "Hapi-moon-server",
+      "script": "./server.js",
+      "args": [
+        "--NODE_CONFIG_DIR=./config"
+      ],
+      "watch": false,
+      "node_args": "",
+      "max_memory_restart": "512M",
+      "exec_mode": "cluster",
+      "instances": 2,
+      "ignore_watch": [
+        "[\\/\\\\]\\./",
+        "node_modules",
+        "static"
+      ],
+      "merge_logs": true,
+      "env": {
+        "NODE_ENV": "production"
+      }
+    }
+  ]
+}
