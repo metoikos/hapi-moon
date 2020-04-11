@@ -116,7 +116,7 @@ pm2 startOrRestart pm2-startup.json
 Please visit [PM2 documentation](https://pm2.keymetrics.io/docs/usage/pm2-doc-single-page/) for other details.
 ### PM2 & Docker
 
-You can use PM2 with Docker as well. You can find the instructions inside the Dockerfile.
+You can use PM2 with Docker as well. You will find the instructions inside the Dockerfile.
 Just make sure that you set the correct environment and config files. 
 
 ### Create User
