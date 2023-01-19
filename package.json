@@ -34,7 +34,7 @@
     "@hapi/crumb": "^7.3.2",
     "@hapi/glue": "^6.2.0",
     "@hapi/hapi": "^18.4.1",
-    "@hapi/hoek": "^6.2.4",
+    "@hapi/hoek": "^9.0.4",
     "@hapi/joi": "^15.1.1",
     "@hapi/vision": "^5.5.4",
     "@hapi/yar": "^9.2.1",
